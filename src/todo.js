@@ -2,7 +2,21 @@ import React, {Component} from 'react';
 import List from './list';
 import logo from './favicon.ico';
 import Todoform from './todoform';
+import Rebase from 're-base';
+import app from './Base';
+let base = Rebase.createClass(app.database());
 export default class Todo extends Component {
+    state = {
+        test: ['bonjour', 'aurevoir']
+    }
+    
+    componentDidMount(){
+      base.syncState(`/`, {
+        context: this,
+        state: 'test',
+        asArray: true
+      });
+    }
     constructor(props) {
         super(props);
         this.state = {
